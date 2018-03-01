@@ -5,7 +5,7 @@ def numeric_convert(ele):
     try:
         return int(ele)
     except ValueError:
-        return None
+        return ele
 
 def data_collect(log_number):
     url = 'https://iditarod.com/race/2017/logs/' + str(log_number) + '/'
@@ -43,11 +43,9 @@ def organize_data(keys, table, wanted_keys, extra_keys):
     mushers = {}
     for ele in table:
         while keys[kindex] in extra_keys:
-            print('While loop: key %s' % keys[kindex])
             kindex += 1
             if kindex >= len(keys):
                 kindex = 0
-        print(keys[kindex], ele)
         if ele == '':
             kindex = 0
             mushers = {}
@@ -57,10 +55,13 @@ def organize_data(keys, table, wanted_keys, extra_keys):
         
         elif (keys[kindex] in wanted_keys) and (keys[kindex] not in list(mushers.keys())):
             if '(r)' in ele:
-                ele.strip('(r)')
+                ele = ele.strip('(r) ')
                 mushers['rookie_status'] = True
-            else:
+                
+            elif 'rookie_status' not in mushers.keys():
                 mushers['rookie_status'] = False
+
+            ele = numeric_convert(ele)
             mushers[keys[kindex]] = ele
             kindex += 1
             if len(mushers) == len(wanted_keys):
@@ -77,6 +78,5 @@ def log_data(log_number, finished_keys, progress_keys, extra_keys):
     musher_list = organize_data(tables[0], tables[1], finished_keys, extra_keys)
     if len(tables) > 2:
         musher_list.append(organize_data(tables[2], tables[3], progress_keys, extra_keys))
-    print(musher_list)
     return musher_list
 
