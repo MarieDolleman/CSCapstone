@@ -43,8 +43,9 @@ def organize_data(keys, table, wanted_keys, extra_keys):
     mushers = {}
     for ele in table:
         while keys[kindex] in extra_keys:
+            print('While loop: key %s' % keys[kindex])
             kindex += 1
-            if kindex <= len(keys):
+            if kindex >= len(keys):
                 kindex = 0
         print(keys[kindex], ele)
         if ele == '':

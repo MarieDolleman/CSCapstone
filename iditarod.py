@@ -7,7 +7,7 @@ def main():
     # Current check point not previous checkpoint
     progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
     finished_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Total Race Time', 'Dogs In', 'rookie']
-    extra_keys = ['Previous', 'Out', 'In', 'LayoverCompleted', 'Status']
+    extra_keys = ['Out', 'Rest In Chkpt', 'Time Enroute', 'Previous', 'LayoverCompleted', 'Status', 'Time']
     # extra keys originally passed to organize_data
     log = scrape_data.log_data(log_number, finished_keys, progress_keys, extra_keys)
     race_stats = race.Race(log[0])
