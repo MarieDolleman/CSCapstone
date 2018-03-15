@@ -1,6 +1,6 @@
 class Race():
-    def __init__(self, mushers):
-        self.__num_mushers = mushers
+    def __init__(self, num_mushers):
+        self.__num_mushers = num_mushers
         self.check_points = []
         self.__dog_checks = []
         # If mushers drop out, the num mushers point allocation should always stay the same.
@@ -9,14 +9,15 @@ class Race():
         return self.__num_mushers
 
     # The 1st person in Nome gets 300 points, 2nd 200 and 3rd 100.
-    def in_Nome(self):
+    def reached_Nome(self):
         if 'Nome' in self.check_points:
             return True
         else:
             return False
     
     def add_checkpoints(self, new_check_point):
-        self.check_points.append(new_check_point)
+        if new_check_point not in self.check_points:
+            self.check_points.append(new_check_point)
         if not len(self.check_points) % 5:
             self.add_dog_check(new_check_point)
     

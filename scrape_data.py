@@ -41,33 +41,44 @@ def organize_data(keys, table, wanted_keys, extra_keys):
     kindex = 0
     musher_list = []
 
-    mushers = {}
+    musher = {}
     for ele in table:
+        # skip over unwanted keys
         while keys[kindex] in extra_keys:
             kindex += 1
             if kindex >= len(keys):
                 kindex = 0
+        # skip over white spaces
         if ele == '':
             kindex = 0
-            mushers = {}
+            musher = {}
             continue
+        # skip over begining keys
         elif (ele in keys):
             continue
         
-        elif (keys[kindex] in wanted_keys) and (keys[kindex] not in list(mushers.keys())):
+        # get viable data for mushers
+        elif (keys[kindex] in wanted_keys) and (keys[kindex] not in list(musher.keys())):
+            # get rookie status
             if '(r)' in ele:
                 ele = ele.strip('(r) ')
-                mushers['rookie_status'] = True
+                musher['rookie_status'] = True
                 
-            elif 'rookie_status' not in mushers.keys():
-                mushers['rookie_status'] = False
+            elif 'rookie_status' not in musher.keys():
+                musher['rookie_status'] = False
 
+            # all other stats
             ele = numeric_convert(ele)
-            mushers[keys[kindex]] = ele
+            musher[keys[kindex]] = ele
             kindex += 1
-            if len(mushers) == len(wanted_keys):
+            # if wanted data is completed
+            if len(musher) == len(wanted_keys):
                 kindex = 0
-                musher_list.append(mushers)
+                # make sure Dogs is correct key for later
+                if 'Dogs In' in musher.keys():
+                    musher['Dogs'] = musher.pop('Dogs In')
+                musher_list.append(musher)
+        # if not viable data, go through again
         else:
             kindex += 1
     return musher_list
@@ -82,13 +93,13 @@ def log_data(log_number, finished_keys, progress_keys, extra_keys):
 
     return musher_list
 
-def main():
+def __data_qc():
     log_number = 677 # Test log number
     progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
     finished_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Total Race Time', 'Dogs In', 'rookie']
     extra_keys = ['Out', 'Rest In Chkpt', 'Time Enroute', 'Previous', 'LayoverCompleted', 'Status', 'Time']
     # extra keys originally passed to organize_data
-    return log_data(log_number, finished_keys, progress_keys, extra_keys)
+    print(log_data(log_number, finished_keys, progress_keys, extra_keys))
 
 if __name__ == '__main__':
-    main()
+    __data_qc()

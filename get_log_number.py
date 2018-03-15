@@ -1,7 +1,7 @@
 from urllib.request import urlopen
 from bs4 import BeautifulSoup
 
-def get_log_num():
+def get_log_nums():
     url = 'http://iditarod.com/race/2018/logs/'
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
@@ -28,5 +28,5 @@ def get_log_num():
     return return_logs
 
 if __name__ == '__main__':
-    get_log_num()
+    get_log_nums()
 

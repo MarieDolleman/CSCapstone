@@ -1,27 +1,36 @@
-from datetime import datetime, timedelta
-from time import sleep
-
 import race
 import mushers
 import scrape_data
 
-def main():
-    log_number = 583
-    # Current check point not previous checkpoint
-    progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
-    finished_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Total Race Time', 'Dogs In', 'rookie']
-    extra_keys = ['Out', 'Rest In Chkpt', 'Time Enroute', 'Previous', 'LayoverCompleted', 'Status', 'Time']
+def progress_keys():
+    return ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
+
+
+def finished_keys():
+    return ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Total Race Time', 'Dogs In', 'rookie']
+
+
+def extra_keys():
+    return ['Out', 'Rest In Chkpt', 'Time Enroute', 'Previous', 'LayoverCompleted', 'Status', 'Time']
+
+
+def update_iditarod(log_number):
     # extra keys originally passed to organize_data
-    scrape_data.log_data(log_number, finished_keys, progress_keys, extra_keys)
-    #race_stats = race.Race(log[0])
+    musher_list = scrape_data.log_data(log_number, finished_keys(), progress_keys(), extra_keys())
+    
+    return musher_list
 
-    #def reached_Nome():
-        #return race_stats.in_Nome()
 
-def call_data():
-    for i in range(0, 61):
-        print('Hello')
-        sleep(10)
+def init_iditarod(log_number):
+    data = scrape_data.log_data(log_number, finished_keys(), progress_keys(), extra_keys())
+    race_stats = race.Race(len(data))
+    # list of musher objects
+    musher_objects = []
+    for musher in data:
+        musher_objects.append(mushers.Mushers(musher))
+
+    return race_stats, musher_objects
+
 
 if __name__ == '__main__':
-    main()
+    init_iditarod(1)
