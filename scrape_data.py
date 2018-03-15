@@ -8,7 +8,8 @@ def numeric_convert(ele):
         return ele
 
 def data_collect(log_number):
-    url = 'https://iditarod.com/race/2017/logs/' + str(log_number) + '/'
+    log_number = 677 # Test log number
+    url = 'http://iditarod.com/race/2018/logs/' + str(log_number) + '/'
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
 
@@ -76,7 +77,18 @@ def log_data(log_number, finished_keys, progress_keys, extra_keys):
     # returns key then corresponding table, then possibly second set of keys and table
     tables = table_clean(raw_data)
     musher_list = organize_data(tables[0], tables[1], finished_keys, extra_keys)
-    if len(tables) > 2:
-        musher_list.append(organize_data(tables[2], tables[3], progress_keys, extra_keys))
+    if len(tables) > 1:
+        musher_list += (organize_data(tables[2], tables[3], progress_keys, extra_keys))
+
     return musher_list
 
+def main():
+    log_number = 677 # Test log number
+    progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
+    finished_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Total Race Time', 'Dogs In', 'rookie']
+    extra_keys = ['Out', 'Rest In Chkpt', 'Time Enroute', 'Previous', 'LayoverCompleted', 'Status', 'Time']
+    # extra keys originally passed to organize_data
+    return log_data(log_number, finished_keys, progress_keys, extra_keys)
+
+if __name__ == '__main__':
+    main()
