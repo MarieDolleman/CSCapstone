@@ -1,6 +1,6 @@
 from time import sleep
 
-from get_log_number import get_log_nums
+from utils import get_log_nums
 from iditarod import init_iditarod, update_iditarod
 import update_insert_sql
 
@@ -15,6 +15,8 @@ def main():
     # STEP 1:
     race_stats, musher_objects = init_iditarod(1)
     update_insert_sql.start_race(musher_objects)
+    print('Finished with log 1')
+
 
     # STEPS 2-6:
     # list of the logs we'll be using in the sim
@@ -33,6 +35,7 @@ def main():
                     break
         # STEP 4:
         update_insert_sql.update_race(musher_objects)
+        print('Finished with log %s' % log)
         # STEP 5:
         sleep(5*60)
 

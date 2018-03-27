@@ -30,7 +30,6 @@ def start_race(musher_list):
             "values(%s, %s, 0, 0, %s)"
         )
         for mush in musher_list:
-            print(mush.name, mush.mush_id, mush.num_dogs, mush.is_rookie)
             cnx.execute(query, (mush.mush_id, mush.num_dogs, mush.is_rookie))
     except Error as e:
         print(e)
