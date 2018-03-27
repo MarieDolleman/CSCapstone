@@ -12,9 +12,6 @@ class Mushers():
         else:
             self.is_rookie = 0
 
-    def get_rookie_status(self):
-        return self.is_rookie
-
     def update(self, musher, num_mushers, dog_check, reached_Nome):
         assert(self.name == musher['Musher'])
         self.pos = musher['Pos']
@@ -26,9 +23,6 @@ class Mushers():
 
         if musher['Checkpoint'] in dog_check:
             self.total_points += self.num_dogs
-
-    def init_stats(self):
-        return self.mush_id, self.num_dogs, self.total_points, self.pos, self.is_rookie
 
     def get_stats(self):
         return self.num_dogs, self.total_points, self.pos, self.mush_id

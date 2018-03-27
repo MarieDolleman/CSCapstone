@@ -4,9 +4,10 @@ from mysql.connector import Error
 def test_connect():
     """ Connect to MySQL database """
     try:
-        conn = mysql.connector.connect(database='lexidela_lexidela_iditarod_code_test',
-                                        user='lexidela',
-                                        password='23march1996')
+        conn = mysql.connector.connect(host='fantasy-iditarod.com',
+                                        database='lexidela_iditarod_code_test',
+                                        user='lexidela_caps',
+                                        password='password123') #password='ezu40B48lE'
         if conn.is_connected():
             print('Connected to MySQL database')
 
@@ -18,33 +19,36 @@ def test_connect():
 
 def start_race(musher_list):
     try:
-        conn = mysql.connector.connect(database='lexidela_lexidela_iditarod_code_test',
-                                            user='lexidela',
-                                            password='23march1996')
+        conn = mysql.connector.MySQLConnection(host='fantasy-iditarod.com',
+                                        database='lexidela_iditarod_code_test',
+                                        user='lexidela_caps',
+                                        password='password123')
 
         cnx = conn.cursor()
         query = (
-            "insert into stats mush_id, num_dogs, tot_points, rank, rookie "
-            "values (%s, %s, 0, 0, %s )"
+            "insert into stats(mush_id, num_dogs, tot_points, rank, rookie) " \
+            "values(%s, %s, 0, 0, %s)"
         )
         for mush in musher_list:
-            cnx.execute(query, (mush.init_stats()))
+            print(mush.name, mush.mush_id, mush.num_dogs, mush.is_rookie)
+            cnx.execute(query, (mush.mush_id, mush.num_dogs, mush.is_rookie))
     except Error as e:
-        raise e
+        print(e)
 
     finally:
         conn.close()
 
 def update_race(musher_list):
     try:
-        conn = mysql.connector.connect(database='lexidela_lexidela_iditarod_code_test',
-                                            user='lexidela',
-                                            password='23march1996')
+        conn = mysql.connector.connect(host='fantasy-iditarod.com',
+                                        database='lexidela_iditarod_code_test',
+                                        user='lexidela_caps',
+                                        password='password123')
 
         cnx = conn.cursor()
         query = (
-            "update stats set num_dogs = %s, tot_points = %s, rank=%s "
-            "where mush_id = %s "
+            "update stats set num_dogs=%s, tot_points=tot_points+%s, rank=%s "
+            "where mush_id = %s"
         )
         for mush in musher_list:
             cnx.execute(query, (mush.get_stats()))

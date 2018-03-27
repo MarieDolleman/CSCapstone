@@ -1,8 +1,8 @@
 from time import sleep
-from update_insert_sql
 
 from get_log_number import get_log_nums
 from iditarod import init_iditarod, update_iditarod
+import update_insert_sql
 
 def main():
     # Step 1: Get the first data and initialize database, all points 0
@@ -28,8 +28,8 @@ def main():
         for musher in updated_list:
             # search for the musher
             for obj in musher_objects:
-                if obj.name == musher['Musher']
-                    obj.update(musher, race_stats.num_mushers, race_stats.get_dog_checks(), race_stats.reached_Nome())
+                if obj.name == musher['Musher']:
+                    obj.update(musher, race_stats.get_num_mushers(), race_stats.get_dog_checks(), race_stats.reached_Nome())
                     break
         # STEP 4:
         update_insert_sql.update_race(musher_objects)
