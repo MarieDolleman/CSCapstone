@@ -40,6 +40,12 @@ def organize_data(keys, table, wanted_keys):
     musher = {}
     count_spaces = 0
     for ele in table:
+        # strip extra symbols, not annoyed at all
+        if ' •' in ele:
+            ele = ele.strip(' •')
+        if ' *' in ele:
+            ele = ele.strip(' *')
+        
         # if its a date, continue to next
         if is_date(ele):
             continue
@@ -56,10 +62,6 @@ def organize_data(keys, table, wanted_keys):
         # break if scratched data
         if ele == 'Scratched' or ele == 'Withdrawn':
             return []
-
-        # strip extra symbols
-        if ' •' in ele:
-            ele = ele.strip(' •')
 
         if count_spaces >= 4:
             count_spaces = 0
@@ -104,7 +106,7 @@ def log_data(log_number, progress_keys):
     return musher_list
 
 def __data_qc():
-    log_number = 667 # Test log number
+    log_number = 456 # Test log number
     progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
     # extra keys originally passed to organize_data
     musher_list = log_data(log_number, progress_keys)

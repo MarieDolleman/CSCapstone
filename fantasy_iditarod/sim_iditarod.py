@@ -13,15 +13,18 @@ def main():
     # Step 6: Repeat through Step 2
 
     # STEP 1:
+    print('Starting Race')
     race_stats, musher_objects = init_iditarod(1)
     update_insert_sql.start_race(musher_objects)
-    print('Finished with log 1')
-
 
     # STEPS 2-6:
     # list of the logs we'll be using in the sim
     log_nums = get_log_nums()
+    print('Currently on log 1 of %s' % len(log_nums))
+    sleep(5*60)
+
     for log in log_nums[1:]:
+        print('Currently on log %s of %s' % (log, len(log_nums)))
         # STEP 2:
         updated_list = update_iditarod(log)
         # STEP 3:
@@ -35,9 +38,10 @@ def main():
                     break
         # STEP 4:
         update_insert_sql.update_race(musher_objects)
-        print('Finished with log %s' % log)
         # STEP 5:
         sleep(5*60)
+
+    print('Race Finished')
 
 if __name__ == '__main__':
     main()
