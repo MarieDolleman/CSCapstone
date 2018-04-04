@@ -1,4 +1,3 @@
-import iditarod
 class Mushers():
     """ Mushers class for holding all mushers data"""
     def __init__(self, musher):
@@ -7,12 +6,13 @@ class Mushers():
         self.num_dogs = musher['Dogs'] # five dog checkpoints
         self.total_points = 0
         self.pos = 0
+        self.checkpoint = musher['Checkpoint']
         if musher['rookie_status']:
             self.is_rookie = 1
         else:
             self.is_rookie = 0
 
-    def update(self, musher, num_mushers, dog_check, reached_Nome):
+    def tally_points(self, musher, num_mushers, dog_check, reached_Nome):
         assert(self.name == musher['Musher'])
         self.pos = musher['Pos']
         self.num_dogs = musher['Dogs']
@@ -25,4 +25,7 @@ class Mushers():
             self.total_points += self.num_dogs
 
     def get_stats(self):
-        return self.num_dogs, self.total_points, self.pos, self.mush_id
+        return self.num_dogs, self.total_points, self.pos, self.checkpoint, self.mush_id
+
+    def print_musher(self):
+        print(self.get_stats())

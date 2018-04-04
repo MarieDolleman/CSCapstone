@@ -2,7 +2,8 @@ from urllib.request import urlopen
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-def get_log_nums():
+def sim_log_nums():
+    '''Get log numbers from the official Iditarod Website'''
     url = 'http://iditarod.com/race/2018/logs/'
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
@@ -25,8 +26,29 @@ def get_log_nums():
     for i, log in enumerate(all_logs[:-1]):
         if not i % sub_logs:
             return_logs.append(log)
-    return_logs.append(all_logs[-1:])
+    return_logs += all_logs[-1:]
     return return_logs
+
+def get_all_logs():
+    '''Get log numbers from the official Iditarod Website'''
+    url = 'http://iditarod.com/race/2018/logs/'
+    page = urlopen(url)
+    soup = BeautifulSoup(page, 'html.parser')
+
+    # table of data
+    raw = soup.find_all('div', attrs={'class':'post-content'})
+    raw = raw[0].text.strip()
+    raw = raw.split('\n')
+
+    all_logs = []
+    for log_num in raw:
+        try:
+            all_logs.append(int(log_num))
+        except ValueError:
+            continue
+    
+    all_logs.reverse()
+    return all_logs
 
 def rh(table):
     '''Remove column headers from data'''
@@ -40,6 +62,7 @@ def rh(table):
     return table
 
 def is_date(ele):
+    '''Check to see if an element is in a date format'''
     formats = ['%d/%m %I:%M:%S', '%m/%d %I:%M:%S', '%d/%m 00:%M:%S', '%d/%m %H:%M:%S', '%m/%d %H:%M:%S',
                 '%Hh %Mm', '%Hh %Mm %Ss', '%dd %Hh %Mm %Ss', ]
     for fmt in formats:
@@ -51,6 +74,7 @@ def is_date(ele):
     return False
 
 def is_float(ele):
+    '''Check to see if an element is a float'''
     if ele.isdigit():
         return False
     try:
@@ -60,5 +84,5 @@ def is_float(ele):
         return False
 
 if __name__ == '__main__':
-    get_log_nums()
+    sim_log_nums()
 

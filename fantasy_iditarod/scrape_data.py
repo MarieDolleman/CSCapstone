@@ -106,7 +106,7 @@ def log_data(log_number, progress_keys):
     return musher_list
 
 def __data_qc():
-    log_number = 456 # Test log number
+    log_number = 36 # Test log number
     progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
     # extra keys originally passed to organize_data
     musher_list = log_data(log_number, progress_keys)

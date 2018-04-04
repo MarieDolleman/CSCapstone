@@ -19,7 +19,9 @@ class Race():
         if new_check_point not in self.check_points:
             self.check_points.append(new_check_point)
         if not len(self.check_points) % 5:
-            self.add_dog_check(new_check_point)
+            if new_check_point not in self.__dog_checks:
+                self.add_dog_check(new_check_point)
+            print(new_check_point)
     
     def add_dog_check(self, new_dog_check):
         self.__dog_checks.append(new_dog_check)
