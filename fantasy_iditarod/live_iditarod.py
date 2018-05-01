@@ -8,6 +8,7 @@ import mushers
 import race
 
 def progress_keys():
+    '''Return the keys we care about'''
     return ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
 
 def main():

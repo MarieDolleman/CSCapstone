@@ -9,6 +9,7 @@ import update_insert_sql as sql
 
 class Test_DB(unittest.TestCase):
     def test_connection(self):
+        # Test the connection to the database
         connected = sql.test_connect()
         self.assertTrue(connected)
 

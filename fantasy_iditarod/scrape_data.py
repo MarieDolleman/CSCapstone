@@ -5,6 +5,7 @@ from datetime import datetime
 from utils import rh, is_date, is_float
 
 def data_collect(log_number):
+    '''Return the data from the given log number'''
     url = 'http://iditarod.com/race/2018/logs/' + str(log_number) + '/'
     page = urlopen(url)
     soup = BeautifulSoup(page, 'html.parser')
@@ -14,13 +15,16 @@ def data_collect(log_number):
     return raw
 
 def table_clean(raw):
+    '''Clean the HTML from the returned table from the specified log'''
     keys = raw[0].find_all('th')
     finished_keys = []
+    # strip the keys of HTML
     for col in keys:
         finished_keys.append(col.text.strip())
     finished = raw[0].text.strip()
     finished = finished.split('\n')
 
+    # If theres a finished table and a still-going table, clean the second table
     if len(raw) > 1:
         keys = raw[1].find_all('th')
         racing_keys = []
@@ -34,6 +38,7 @@ def table_clean(raw):
     return [finished_keys, rh(finished)]
 
 def organize_data(keys, table, wanted_keys):
+    '''Organize all of the mushers and their stats for that log'''
     windex = 0
     musher_list = []
 
@@ -96,6 +101,7 @@ def organize_data(keys, table, wanted_keys):
     return musher_list
 
 def log_data(log_number, progress_keys):
+    '''Driver for collecting the raw data, cleaning and organizing it'''
     raw_data = data_collect(log_number)
     # returns key then corresponding table, then possibly second set of keys and table
     tables = table_clean(raw_data)
@@ -106,6 +112,7 @@ def log_data(log_number, progress_keys):
     return musher_list
 
 def __data_qc():
+    '''Used for quick debugging purposes only'''
     log_number = 36 # Test log number
     progress_keys = ['Pos', 'Musher', 'Bib', 'Checkpoint', 'Dogs', 'rookie']
     # extra keys originally passed to organize_data
