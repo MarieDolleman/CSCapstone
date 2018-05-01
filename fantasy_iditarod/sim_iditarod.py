@@ -53,7 +53,7 @@ def main():
         update_insert_sql.update_race(musher_list)
         
         # STEP 5:
-        sleep(1*60)
+        sleep(5*60)
 
     print('Race Finished')
 if __name__ == '__main__':
