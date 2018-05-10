@@ -1,0 +1,229 @@
+body {
+    background-color: #331800;
+    background: url(Images/pale_logo2.png);
+    background-size: 5%;
+}
+.main-content {
+    width: 95%;
+    max-width: 1300px;
+    background-color: #fffffd;
+    padding-bottom: 50px;
+    margin: 0 auto;
+}
+.header {
+    width: 100%;
+}
+.header img {
+    width: 100%;
+}
+.nav-bar {
+    background-color: #8fb6bf;
+    background-color: #1e2e08;
+}
+.nav-bar ul {
+    text-align: center;
+    margin: 0 auto;
+    padding: 0;
+}
+.nav-bar li {
+    display: inline-block;
+    margin: 0 5px;
+}
+.nav-bar li a {
+    display: block;
+    padding: 5px 50px;
+    text-decoration: none;
+    color: #fff;
+    padding: 21px;
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.nav-bar a:hover {
+    background-color: #aac0c5;
+    color: #331800;
+}
+.content {
+    width: 90%;
+    margin: 20px auto;
+}
+.cta-button {
+    background-color: #8fb6bf;
+    margin: 0 auto;
+    padding: 10px 15px;
+    border-radius: 15px;
+    text-transform: none;
+    color: black;
+    width: 125px;
+    text-align: center;
+}
+.cta-link {
+    text-decoration: none;
+}
+.team-table {
+    border-collapse: collapse;
+    font-size: 16px;
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 15px;
+}
+
+.team-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+    }
+
+.team-table th {
+    background-color: #331800;
+    color: white;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.team-table td:nth-child(-n+2) {
+    text-align: center;
+}
+
+.team-table tr, 
+.team-table td,
+.team-table th {
+    border-bottom: 1px solid #331800;
+    padding: 10px;
+}
+
+.team-table tr th:nth-child(4),tr td:nth-child(4) {
+    display: none;
+}
+
+@media screen and (min-width: 450px) {
+    .team-table tr th:nth-child(4),tr td:nth-child(4) {
+        display: table-cell;
+    }
+}
+
+/*musher table format*/
+.musher-table {
+    border-collapse: collapse;
+    font-size: 16px;
+    width: 90%;
+    margin: 0 auto;
+}
+.musher-table td {
+    border-bottom: 1px solid #331800;
+}
+.musher-table th {
+    background-color: #331800;
+    color: white;
+    font-weight: 400;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.musher-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+.musher-table td {
+    text-align: center;
+    padding: 15px;
+}
+.musher-table tr th:nth-child(4),tr td:nth-child(4) {
+    display: none;
+}
+@media screen and (min-width: 450px) {
+    .musher-table tr th:nth-child(4),tr td:nth-child(4) {
+        display: table-cell;
+    }
+}
+/* Form */
+.musher{
+    color: #331800;
+}
+.musher-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr ;
+    grid-gap: 15px;
+}
+.musher-container * {
+    padding: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.musher-check {
+    display: none;
+}
+
+.musher-row {
+    cursor: pointer;
+}
+
+.past-winner {
+    background-color: #f90000a3;
+}
+.rookie {
+    background-color: #ffef69cf;
+}
+.veteran {
+    background-color: #e67700b5;
+}
+
+.checked {
+    background-color: #aac0c5;
+}
+
+@media screen and (min-width: 650px) {
+    .musher-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+}
+
+@media screen and (min-width: 650px) {
+    .about-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+}
+.about-image img {
+    width: 100%;
+}
+
+.create-submit {
+    border-radius: 10px;
+    height: 50px;
+    width: 100px;
+    font-size: 18px;
+    background-color: #8fb6bf;
+    cursor: pointer;
+}
+.error-message {
+    margin-left: 10px;
+    color: red;
+    font-size: 16px;
+}
+.hover {
+    background-color: #aac0c5;
+}
+.team-name {
+    text-align: center;
+    font-size: 40px;
+}
+.total-points {
+    font-size: 20px;
+    text-align: center;
+}
+.create-team{
+    text-align: center;
+}
+.create-info input {
+    padding: 5px;
+    font-size: 12px;
+}
+.create-info td {
+    padding-bottom: 5px;
+}
